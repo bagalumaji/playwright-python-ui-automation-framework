@@ -25,3 +25,8 @@ class LoginPage:
 
     async def click_on_login_button(self):
         await self.login_button.click()
+
+    async def login_to_application(self,username,password):
+        await self.enter_username(username)
+        await self.enter_password(password)
+        await self.click_on_login_button()
