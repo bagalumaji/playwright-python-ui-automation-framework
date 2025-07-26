@@ -1,5 +1,4 @@
 import pytest
-from playwright.async_api import expect
 
 from pages.login_page import LoginPage
 from pages.product_page import ProductPage
