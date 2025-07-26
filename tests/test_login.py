@@ -11,9 +11,6 @@ async def test_login_succeeds_with_valid_credentials(page):
 
     await page.goto("https://www.saucedemo.com/v1/")
     login_page = LoginPage(page)
-    await login_page.enter_username(username)
-    await login_page.enter_password(password)
-    await login_page.click_on_login_button()
-
+    await login_page.login_to_application(username, password)
     await expect(page.get_by_text("Products")).to_be_visible()
     await page.wait_for_timeout(5000)
