@@ -6,27 +6,27 @@ class LoginPage:
         self.page = page
 
     @property
-    def username_text_box(self) -> Locator:
+    def __username_text_box(self) -> Locator:
         return self.page.locator("#user-name")
 
     @property
-    def password_text_box(self) -> Locator:
+    def __password_text_box(self) -> Locator:
         return self.page.locator("#password")
 
     @property
-    def login_button(self) -> Locator:
+    def __login_button(self) -> Locator:
         return self.page.locator('//input[@value="LOGIN"]')
 
-    async def enter_username(self, name: str):
-        await self.username_text_box.fill(name)
+    async def __enter_username(self, name: str):
+        await self.__username_text_box.fill(name)
 
-    async def enter_password(self, password: str):
-        await self.password_text_box.fill(password)
+    async def __enter_password(self, password: str):
+        await self.__password_text_box.fill(password)
 
-    async def click_on_login_button(self):
-        await self.login_button.click()
+    async def __click_on_login_button(self):
+        await self.__login_button.click()
 
     async def login_to_application(self,username,password):
-        await self.enter_username(username)
-        await self.enter_password(password)
-        await self.click_on_login_button()
+        await self.__enter_username(username)
+        await self.__enter_password(password)
+        await self.__click_on_login_button()
