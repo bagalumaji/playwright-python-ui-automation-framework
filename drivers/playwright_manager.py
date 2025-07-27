@@ -2,8 +2,8 @@ from playwright.async_api import async_playwright, Playwright
 
 
 class PlaywrightManager:
-    async def start_playwright(self):
+    async def start(self)->Playwright:
         return await async_playwright().start()
 
-    async def stop_playwright(self,playwright:Playwright):
+    async def stop(self, playwright:Playwright)->None:
         await playwright.stop()
