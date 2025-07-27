@@ -1,7 +1,9 @@
 from playwright.async_api import BrowserContext, Browser
 
+from drivers.interfaces.ibrowser_context_manager import IBrowserContextManager
 
-class BrowserContextManager:
+
+class BrowserContextManager(IBrowserContextManager):
     async def create(self, browser:Browser)->BrowserContext:
         return await browser.new_context()
 
