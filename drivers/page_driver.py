@@ -1,7 +1,9 @@
 from playwright.async_api import BrowserContext, Page
 
+from drivers.interfaces.ipage_driver import IPageDriver
 
-class PageDriver:
+
+class PageDriver(IPageDriver):
     async def create(self, browser_context: BrowserContext)->Page:
         return await browser_context.new_page()
 
