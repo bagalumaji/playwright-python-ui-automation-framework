@@ -1,7 +1,9 @@
 from playwright.async_api import Browser, Playwright
 
+from drivers.interfaces.ibrowser_manager import IBrowserManager
 
-class BrowserManager:
+
+class BrowserManager(IBrowserManager):
     async def launch(self, playwright: Playwright) -> Browser:
         return await playwright.chromium.launch(headless=False)
 
