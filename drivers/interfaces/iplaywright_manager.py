@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from playwright.async_api import Playwright
 
 
-class IPlaywrightServices(ABC):
+class IPlaywrightManager(ABC):
     @abstractmethod
     async def start(self) -> Playwright: ...
 
