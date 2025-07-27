@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from playwright.async_api import Page, BrowserContext
 
 
-class IPageDriver(ABC):
+class IPageManager(ABC):
 
     @abstractmethod
     async def create(self, context: BrowserContext) -> Page: ...
