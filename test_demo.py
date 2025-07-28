@@ -1,6 +1,12 @@
-import pytest
+from config.config_reader import ConfigReader
+from enums.section_types import SectionTypes
 
+config = ConfigReader()
+print("id : ", id(config))
+headless = config.get(SectionTypes.DEFAULT, "headless")
+print("------------------")
+print("headless : ", headless)
 
-@pytest.mark.asyncio
-async def test_demo(page):
-    await page.goto("https://www.google.com")
+config1 = ConfigReader()
+print("id1 : ", id(config1))
+print("headless : ",config1.get(SectionTypes.DEFAULT,"headless"))
