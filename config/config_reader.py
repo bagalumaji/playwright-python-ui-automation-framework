@@ -20,11 +20,11 @@ class ConfigReader(IConfigReader):
     def get(self, section_type: SectionTypes, key: str) -> str:
         return self.__config.get(section_type.value, key.lower())
 
-    def getboolean(self, key: str, fallback: Optional[bool] = None) -> bool:
+    def getboolean(self,section_type: SectionTypes, key: str) -> bool:
+        return self.__config.getboolean(section_type.value,key)
+
+    def getint(self,section_type: SectionTypes, key: str) -> int:
         pass
 
-    def getint(self, key: str, fallback: Optional[int] = None) -> int:
-        pass
-
-    def getfloat(self, key: str, fallback: Optional[float] = None) -> float:
+    def getfloat(self,section_type: SectionTypes, key: str) -> float:
         pass
