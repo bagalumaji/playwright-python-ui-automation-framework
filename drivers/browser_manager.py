@@ -1,11 +1,22 @@
 from playwright.async_api import Browser, Playwright
 
+from config.config_reader import ConfigReader
 from drivers.interfaces.ibrowser_manager import IBrowserManager
+from enums.section_types import SectionTypes
 
 
 class BrowserManager(IBrowserManager):
     async def launch(self, playwright: Playwright) -> Browser:
-        return await playwright.chromium.launch(headless=False)
+        config = ConfigReader()
+        browser = config.get(SectionTypes.DEFAULT,"browser")
+        headless_mode=config.getboolean(SectionTypes.DEFAULT,"headless")
+        if browser.__eq__("chromium"):
+            return await playwright.chromium.launch(headless=headless_mode)
+        elif browser.__eq__("firefox"):
+            return await playwright.firefox.launch(headless=headless_mode)
+        else:
+            return await playwright.webkit.launch(headless=headless_mode)
+
 
     async def close(self, browser: Browser) -> None:
         await browser.close()
