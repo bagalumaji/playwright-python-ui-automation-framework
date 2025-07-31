@@ -23,7 +23,7 @@ async def playwright() -> AsyncGenerator[Playwright, Any]:
 
 
 @pytest_asyncio.fixture
-async def browser(playwright: Playwright) -> AsyncGenerator[Browser, Any]:
+async def launched_browser(playwright: Playwright) -> AsyncGenerator[Browser, Any]:
     manager: IBrowserManager = BrowserManager()
     i_browser:IBrowser = await manager.launch()
     browser = await i_browser.create_browser(playwright)
@@ -32,16 +32,16 @@ async def browser(playwright: Playwright) -> AsyncGenerator[Browser, Any]:
 
 
 @pytest_asyncio.fixture
-async def browser_context(browser: Browser) -> AsyncGenerator[BrowserContext, Any]:
+async def test_context(launched_browser: Browser) -> AsyncGenerator[BrowserContext, Any]:
     manager: IBrowserContextManager = BrowserContextManager()
-    browser_context = await manager.create(browser)
+    browser_context = await manager.create(launched_browser)
     yield browser_context
     await manager.close(browser_context)
 
 
 @pytest_asyncio.fixture
-async def page(browser_context: BrowserContext) -> AsyncGenerator[Page, Any]:
+async def page(test_context: BrowserContext) -> AsyncGenerator[Page, Any]:
     driver: IPageManager = PageManager()
-    new_page = await driver.create(browser_context)
+    new_page = await driver.create(test_context)
     yield new_page
     await driver.close(new_page)
