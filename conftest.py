@@ -5,6 +5,7 @@ from playwright.async_api import Playwright, Browser, BrowserContext, Page
 
 from drivers.browser_context_manager import BrowserContextManager
 from drivers.browser_manager import BrowserManager
+from drivers.ibrowser import IBrowser
 from drivers.interfaces.ibrowser_context_manager import IBrowserContextManager
 from drivers.interfaces.ibrowser_manager import IBrowserManager
 from drivers.interfaces.ipage_manager import IPageManager
@@ -24,7 +25,8 @@ async def playwright() -> AsyncGenerator[Playwright, Any]:
 @pytest_asyncio.fixture
 async def browser(playwright: Playwright) -> AsyncGenerator[Browser, Any]:
     manager: IBrowserManager = BrowserManager()
-    browser = await manager.launch(playwright)
+    i_browser:IBrowser = await manager.launch()
+    browser = await i_browser.create_browser(playwright)
     yield browser
     await manager.close(browser)
 
