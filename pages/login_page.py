@@ -1,5 +1,7 @@
 from playwright.async_api import Locator
 
+from uiactions.page_actions import PageActions
+
 
 class LoginPage:
     def __init__(self, page):
@@ -18,13 +20,13 @@ class LoginPage:
         return self.page.locator('//input[@value="LOGIN"]')
 
     async def __enter_username(self, name: str) -> None:
-        await self.__username_text_box.fill(name)
+        await PageActions.fill(self.__username_text_box, name)
 
     async def __enter_password(self, password: str) -> None:
-        await self.__password_text_box.fill(password)
+        await PageActions.fill(self.__password_text_box,password)
 
     async def __click_on_login_button(self) -> None:
-        await self.__login_button.click()
+        await PageActions.click(self.__login_button)
 
     async def login_to_application(self, username, password) -> None:
         await self.__enter_username(username)
