@@ -1,5 +1,7 @@
 from playwright.async_api import Page, Locator, expect
 
+from uiactions.assertions import Assertions
+
 
 class ProductPage:
     def __init__(self, page: Page):
@@ -10,4 +12,4 @@ class ProductPage:
         return self.page.get_by_text("Products")
 
     async def verify_product_title_is_displayed(self) -> None:
-        await expect(self.__product_title_locator).to_be_visible()
+        await Assertions.is_visible(self.__product_title_locator)
